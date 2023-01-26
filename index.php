@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if(!empty($_SESSION['password'])) {
+    echo "Benvenuto " . $_SESSION['password'];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -24,6 +32,8 @@
             <?php
                 include __DIR__ . '/partials/function.php';
 
+                $randomPassword = '';
+                
                 if(isset($_GET['length']) && $_GET['length'] != null){
                     $password_length = $_GET['length'];
 
@@ -31,8 +41,10 @@
 
                     echo "<h5> La tua password è: {$randomPassword} </h5>";
                 } else {
-                    echo "<h5> Si prega di inserire una password </h5>";
+                    echo "<h5> Si prega di inserire un valore </h5>";
                 }
+
+                $_SESSION['password'] = $randomPassword;
             ?>
         </main>
     </body>
