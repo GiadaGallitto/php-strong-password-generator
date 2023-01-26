@@ -19,10 +19,20 @@ session_start();
             <h1>Generatore di Password</h1>
         </header>
 
-        <main class="container text-center">
+        <main class="container d-flex flex-column align-items-center">
             <form class="mb-3" action="./index.php" method="GET">
-                <label for="length">Lunghezza Password:</label>
-                <input type="text" name="length" id="length">
+                <div class="mb-3">
+                    <label for="length">Lunghezza Password :</label>
+                    <input type="text" name="length" id="length">
+                </div>
+                <div class="d-flex justify-content-between">
+                    <label for="selection">Seleziona la tipologia di caratteri :</label> <br>
+                    <div>
+                        <input type="checkbox" name="selection" id="selection" value="letters"> Lettere <br>
+                        <input type="checkbox" name="selection" id="selection" value="numbers"> Numeri <br>
+                        <input type="checkbox" name="selection" id="selection" value="symbols"> Simboli <br>
+                    </div>
+                </div>
                 <button type="submit">Invia</button>
             </form>
 
@@ -34,11 +44,13 @@ session_start();
                 if(isset($_GET['length']) && $_GET['length'] != null){
                     $password_length = $_GET['length'];
 
-                    $randomPassword = getUserPassword($password_length);
+                    $passwordtype = $GET['selection'];
+
+                    $randomPassword = getUserPassword($password_length, $passwordtype);
 
                     header("location: ./response.php");
                 } else {
-                    echo "<h5> Si prega di inserire un valore </h5>";
+                    echo "<h5> Si prega di riempire i campi necessari </h5>";
                 }
 
                 $_SESSION['password'] = $randomPassword;
