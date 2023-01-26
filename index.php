@@ -1,19 +1,3 @@
-<?php
-
-function getUserPassword($strlength){
-    $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!$%&=?@';
-    return substr(str_shuffle($chars), 0, $strlength);
-};
-
-if(isset($_GET['length'])){
-    $password_length = $_GET['length'];
-
-    $randomPassword = getUserPassword($password_length);
-
-    echo $randomPassword;
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -36,6 +20,20 @@ if(isset($_GET['length'])){
                 <input type="text" name="length" id="length">
                 <button type="submit">Invia</button>
             </form>
+
+            <?php
+                include __DIR__ . '/partials/function.php';
+
+                if(isset($_GET['length']) && $_GET['length'] != null){
+                    $password_length = $_GET['length'];
+
+                    $randomPassword = getUserPassword($password_length);
+
+                    echo "<h5> La tua password è: {$randomPassword} </h5>";
+                } else {
+                    echo "<h5> Si prega di inserire una password </h5>";
+                }
+            ?>
         </main>
     </body>
 </html>
