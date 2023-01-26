@@ -1,9 +1,6 @@
 <?php
 session_start();
 
-if(!empty($_SESSION['password'])) {
-    echo "Benvenuto " . $_SESSION['password'];
-}
 ?>
 
 <!DOCTYPE html>
@@ -18,12 +15,12 @@ if(!empty($_SESSION['password'])) {
     </head>
 
     <body>
-        <header>
+        <header class="container text-center mb-5">
             <h1>Generatore di Password</h1>
         </header>
 
-        <main>
-            <form action="./index.php" method="GET">
+        <main class="container text-center">
+            <form class="mb-3" action="./index.php" method="GET">
                 <label for="length">Lunghezza Password:</label>
                 <input type="text" name="length" id="length">
                 <button type="submit">Invia</button>
@@ -33,13 +30,13 @@ if(!empty($_SESSION['password'])) {
                 include __DIR__ . '/partials/function.php';
 
                 $randomPassword = '';
-                
+
                 if(isset($_GET['length']) && $_GET['length'] != null){
                     $password_length = $_GET['length'];
 
                     $randomPassword = getUserPassword($password_length);
 
-                    echo "<h5> La tua password è: {$randomPassword} </h5>";
+                    header("location: ./response.php");
                 } else {
                     echo "<h5> Si prega di inserire un valore </h5>";
                 }
